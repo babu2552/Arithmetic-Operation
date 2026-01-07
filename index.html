@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Arithmetic Calculator</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background: #fff;
+    width: 360px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #667eea;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #5a67d8;
+}
+
+.result {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.error {
+    color: red;
+}
+.success {
+    color: green;
+}
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+    <h2>Arithmetic Calculator</h2>
+
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+
+    <select id="operator">
+        <option value="+">Addition (+)</option>
+        <option value="-">Subtraction (-)</option>
+        <option value="*">Multiplication (×)</option>
+        <option value="/">Division (÷)</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="output"></div>
+</div>
+
+<script>
+function calculate() {
+    let n1 = parseFloat(document.getElementById("num1").value);
+    let n2 = parseFloat(document.getElementById("num2").value);
+    let op = document.getElementById("operator").value;
+    let output = document.getElementById("output");
+
+    if (isNaN(n1) || isNaN(n2)) {
+        output.innerHTML = "❌ Please enter valid numbers";
+        output.className = "result error";
+        return;
+    }
+
+    let result;
+
+    switch(op) {
+        case "+":
+            result = n1 + n2;
+            break;
+        case "-":
+            result = n1 - n2;
+            break;
+        case "*":
+            result = n1 * n2;
+            break;
+        case "/":
+            if (n2 === 0) {
+                output.innerHTML = "❌ Division by zero not allowed";
+                output.className = "result error";
+                return;
+            }
+            result = n1 / n2;
+            break;
+    }
+
+    output.innerHTML = `✅ Result: ${result}`;
+    output.className = "result success";
+}
+</script>
+
+</body>
+</html>
